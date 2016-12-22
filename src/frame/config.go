@@ -1,8 +1,10 @@
 package frame
 
+//该文件主要是获取服务器启动的各个配置ip,port等
+
 import (
 	"encoding/json"
-    "frame/logger"
+	"frame/logger"
 	"io/ioutil"
 	"os"
 	"path"

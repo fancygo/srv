@@ -1,5 +1,7 @@
 package logger
 
+//这边是抄的我们游戏的 = =0
+
 import (
 	"fmt"
 	"runtime"
@@ -31,7 +33,7 @@ const (
 	colorBlue
 	colorMagenta
 	colorCyan
-    colorWhite
+	colorWhite
 )
 
 func colorSeq(color int) string {
@@ -41,6 +43,7 @@ func colorSeq(color int) string {
 func colorSeqBold(color int) string {
 	return fmt.Sprintf("\033[%d;1m", color)
 }
+
 /*
 func colorInit() {
 
@@ -78,8 +81,8 @@ func colorString(level int) (tag string, cPre string, cSuf string) {
 	tag = v[0]
 	//cPre = v[1]
 	//cSuf = v[3]
-    cPre = ""
-    cSuf = ""
+	cPre = ""
+	cSuf = ""
 
 	return
 }

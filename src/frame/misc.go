@@ -1,10 +1,10 @@
 package frame
 
-//package main
+//一些杂的字节处理函数
 import (
 	"encoding/binary"
 	"fmt"
-    _"frame/logger"
+	_ "frame/logger"
 	"os"
 )
 

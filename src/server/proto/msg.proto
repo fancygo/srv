@@ -1,5 +1,5 @@
 package proto;
-
+//曾经用过一版proto的消息处理, 之后因为客户端处理不方便, 改为json消息结构
 //新用户验证请求
 message RequestUserVerify{
     optional int32 msgid = 1;//101
