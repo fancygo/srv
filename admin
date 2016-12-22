@@ -1,0 +1,35 @@
+#!/bin/bash
+workdir=$(cd `dirname $0`; pwd)
+srcdir=$workdir/src/server
+scptdir=$workdir/script
+
+useropt=$1
+shift 1
+target=$@
+
+usage()
+{
+    echo "make"
+    echo "run"
+    echo "stop"
+}
+
+main()
+{
+    case $useropt in
+        make | m)
+            cd $scptdir
+            ./_build $srcdir $target
+            ;;
+        run)
+            ./bin/main_server main_server >> ./log/core.game.log 2>&1 &
+            ;;
+        *)
+            usage
+            ;;
+    esac
+}
+
+set +x
+main
+set -x

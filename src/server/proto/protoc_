@@ -1,0 +1,3 @@
+#!/bin/bash
+#protoc -I ./ --cpp_out ./ $1
+protoc --go_out ./ $1

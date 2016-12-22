@@ -1,0 +1,82 @@
+package proto;
+
+//新用户验证请求
+message RequestUserVerify{
+    optional int32 msgid = 1;//101
+    optional int32 userid = 2;
+}
+
+//新用户验证返回
+message ReplyUserVerify{
+    optional int32 msgid = 1;//102
+    optional int32 userid = 2;
+}
+
+//关卡结构
+message Craft{
+    optional int32 id = 1;  //关卡id,上传的时候为0
+    optional int32 rect = 2;
+    optional string data = 3;
+    optional int32 praise = 4;
+}
+
+//上传新关卡
+message UploadNewCraft{
+    optional int32 typ = 1;   //类型区分普通精选
+    optional Craft craft = 2;
+}
+
+//上传新关卡返回
+message UploadNewCraftRet{
+    optional int32 ret = 1;
+    optional int32 craftid = 2;
+}
+
+//拉取关卡
+message GetCraft{
+    optional int32 typ = 1; //类型区分普通精选
+    optional int32 idx = 2; //拉取idx之后的关卡数据, idx表示数组的索引, 从0开始
+}
+
+//拉取关卡返回
+message GetCraftRet{
+    optional int32 ret = 1;
+    repeated Craft crafts = 2;
+}
+
+//点赞
+message PraiseCraft{
+    optional int32 typ = 1;
+    optional int32 idx = 2;
+    optional int32 id = 3;
+}
+
+//点赞返回
+message PraiseCraftRet{
+    optional int32 ret = 1;
+}
+
+//点赞结构
+message PraiseEntry{
+    optional int32 id = 1;
+    optional int32 praise = 2;
+}
+
+//拉取点赞
+message GetPraiseMsg{
+    optional int32 typ = 1;
+    optional int32 idx = 2;
+}
+
+//拉取点赞返回
+message GetPraiseMsgRet{
+    optional int32 ret = 1;
+    repeated PraiseEntry praises = 2;
+}
+
+//暂时不用,后续会设计一个统一消息处理的机制
+message Msg{
+    //required int32              msgid   = 1;
+    optional RequestUserVerify  req_uv  = 2;
+    optional ReplyUserVerify    rep_uv  = 3;
+}

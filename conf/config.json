@@ -1,0 +1,35 @@
+{
+    "mainserver":
+    {
+        "ip":"218.244.133.249",
+        "port":"9704"
+    },
+    "dbrpc":
+    {
+        "ip":"139.196.37.161",
+        "port":"9705"
+    },
+    "dbserver":
+    {
+        "ip":"139.196.37.161",
+        "port":"9706"
+    },
+    "logserver":
+    {
+        "ip":"139.196.37.161",
+        "port":"9707"
+    },
+    "mysql":
+    {
+        "host":"localhost",
+        "port":"3306",
+        "user":"fancy",
+        "pswd":"linuxfj1010"
+    },
+    "redis":
+    {
+        "host":"e725fd64fa154cbe.m.cnsha.kvstore.aliyuncs.com",
+        "port":"6379",
+        "pswd":"LinuxFJ1010"
+    }
+}
