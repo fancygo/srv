@@ -24,12 +24,12 @@
         "host":"localhost",
         "port":"3306",
         "user":"fancy",
-        "pswd":"linuxfj1010"
+        "pswd":"****"
     },
     "redis":
     {
         "host":"e725fd64fa154cbe.m.cnsha.kvstore.aliyuncs.com",
         "port":"6379",
-        "pswd":"LinuxFJ1010"
+        "pswd":"***"
     }
 }
