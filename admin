@@ -2,6 +2,8 @@
 workdir=$(cd `dirname $0`; pwd)
 srcdir=$workdir/src/server
 scptdir=$workdir/script
+GOPATH=$GOPATH:$workdir
+export GOPATH
 
 useropt=$1
 shift 1
@@ -22,7 +24,7 @@ main()
             ./_build $srcdir $target
             ;;
         run)
-            ./bin/main_server main_server >> ./log/core.game.log 2>&1 &
+            ./bin/game_server game_server >> ./log/game.log 2>&1 &
             ;;
         *)
             usage

@@ -7,7 +7,7 @@ import (
 	"frame/def"
 	"frame/logger"
 	_ "github.com/ugorji/go/codec"
-	module "server/main_server/game"
+	module "server/game_server/game"
 )
 
 func UserLogin(recv_msg *def.UserLoginA, send_msg *def.UserLoginR) string {
@@ -35,7 +35,7 @@ func UploadCraft(recv_data []byte, send_msg *def.UploadCraftR, author *string, i
 	logger.Info("recv_data = %s", string(recv_data))
 	err := json.Unmarshal(recv_data, recvMsg)
 	if err != nil {
-		logger.Error("UploadCraft json unmarshal err =", err)
+		logger.Error("UploadCraft json unmarshal err = %+v", err)
 		send_msg.Ret = def.Ret_UnMarshalERR
 		return
 	}
@@ -71,7 +71,7 @@ func GetCraft(recv_data []byte, send_msg *def.GetCraftR) {
 	logger.Info("recv_data = %s", string(recv_data))
 	err := json.Unmarshal(recv_data, recvMsg)
 	if err != nil {
-		logger.Error("GetCraft json unmarshal err =", err)
+		logger.Error("GetCraft json unmarshal err = %+v", err)
 		send_msg.Ret = def.Ret_UnMarshalERR
 		return
 	}
@@ -121,7 +121,7 @@ func PraiseCraft(recv_data []byte, send_msg *def.PraiseCraftR) {
 	logger.Info("recv_data = %s", string(recv_data))
 	err := json.Unmarshal(recv_data, recvMsg)
 	if err != nil {
-		logger.Error("PraiseCraft json unmarshal err =", err)
+		logger.Error("PraiseCraft json unmarshal err = %+v", err)
 		send_msg.Ret = def.Ret_UnMarshalERR
 		return
 	}
@@ -139,7 +139,7 @@ func GetPraise(recv_data []byte, send_msg *def.GetPraiseR) {
 	logger.Info("recv_data = %s", string(recv_data))
 	err := json.Unmarshal(recv_data, recvMsg)
 	if err != nil {
-		logger.Error("GetCraft json unmarshal err =", err)
+		logger.Error("GetCraft json unmarshal err = %+v", err)
 		send_msg.Ret = def.Ret_UnMarshalERR
 		return
 	}
@@ -186,7 +186,7 @@ func GetPopular(recv_data []byte, send_msg *def.GetPopularR) {
 	logger.Info("recv_data = %s", string(recv_data))
 	err := json.Unmarshal(recv_data, recvMsg)
 	if err != nil {
-		logger.Error("GetPopular json unmarshal err =", err)
+		logger.Error("GetPopular json unmarshal err = %+v", err)
 		send_msg.Ret = def.Ret_UnMarshalERR
 		return
 	}
@@ -201,14 +201,14 @@ func SyncInfo(recv_data []byte, send_msg *def.SyncInfoR, accid string) {
 	logger.Info("recv_data = %s", string(recv_data))
 	err := json.Unmarshal(recv_data, recvMsg)
 	if err != nil {
-		logger.Error("SyncInfo json unmarshal err =", err)
+		logger.Error("SyncInfo json unmarshal err = %+v", err)
 		send_msg.Ret = def.Ret_UnMarshalERR
 		return
 	}
 
 	info, err := json.Marshal(recvMsg.Info)
 	if err != nil {
-		logger.Error("SyncInfo info marshal err =", err)
+		logger.Error("SyncInfo info marshal err = %+v", err)
 	}
 	send_msg.Ret = module.UserApi.SyncInfo(accid, string(info))
 	return

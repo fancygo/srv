@@ -20,10 +20,11 @@ var (
 )
 
 func Init() bool {
-	user := frame.GetDbUser()
-	pswd := frame.GetDbPswd()
-	host := frame.GetDbHost()
-	dbport := frame.GetDbPort()
+	sqlId := frame.GetMysqlId()
+	user := frame.GetSqlUser(sqlId)
+	pswd := frame.GetSqlPswd(sqlId)
+	host := frame.GetSqlHost(sqlId)
+	dbport := frame.GetSqlPort(sqlId)
 	login := user + ":" + pswd + "@(" + host + ":" + dbport + ")/" + DB_NAME + "?charset=utf8&parseTime=True&loc=Local"
 	var err error
 	db, err = gorm.Open("mysql", login)

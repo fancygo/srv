@@ -60,7 +60,7 @@ func dirInit(wd string) {
 		pidDir = path.Join(workDir, "pid")
 		logDir = path.Join(workDir, "log")
 		srcDir = path.Join(workDir, "src")
-		logger.Notice("workDir =", workDir)
-		logger.Notice("confDir =", confDir)
+		logger.Info("workDir = %+v", workDir)
+		logger.Info("confDir = %+v", confDir)
 	}
 }

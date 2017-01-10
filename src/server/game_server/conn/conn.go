@@ -8,8 +8,8 @@ import (
 	"frame/def"
 	"frame/logger"
 	"golang.org/x/net/websocket"
-	module "server/main_server/game"
-	"server/main_server/msgprocess"
+	module "server/game_server/game"
+	"server/game_server/msgprocess"
 	"sync"
 	"sync/atomic"
 	"time"
@@ -89,7 +89,7 @@ func (this *CliConn) DoRecv(chStop <-chan bool) {
 }
 
 func (this *CliConn) procMsgData(data []byte) {
-	logger.Notice("--------------Msg proc start------------")
+	logger.Info("--------------Msg proc start------------")
 	fmt.Println(data)
 	start := time.Now()
 
@@ -123,7 +123,7 @@ func (this *CliConn) procMsgData(data []byte) {
 	case uint(def.MsgId_GetPopular):
 		sendData = msgprocess.GetPopularMsg(msgData)
 	default:
-		logger.Error("error data =", data)
+		logger.Error("error data = %+v", data)
 		return
 	}
 	if len(sendData) > 0 {

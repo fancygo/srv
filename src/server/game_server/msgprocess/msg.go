@@ -44,14 +44,14 @@ func UserLoginMsg(recv_data []byte) ([]byte, string) {
 	logger.Info("recv_data = %s", string(recv_data))
 	err := json.Unmarshal(recv_data, recvMsg)
 	if err != nil {
-		logger.Error("UserVerify json unmarshal err =", err)
+		logger.Error("UserVerify json unmarshal err = %+v", err)
 		return sendData, ""
 	}
 	accid := UserLogin(recvMsg, sendMsg)
 
 	sendMsgData, err := json.Marshal(sendMsg)
 	if err != nil {
-		logger.Error("UserVerify json marshal err =", err)
+		logger.Error("UserVerify json marshal err = %+v", err)
 		return sendData, ""
 	}
 	msgLen := len(sendMsgData)
@@ -73,7 +73,7 @@ func UploadCraftMsg(recv_data []byte) ([]byte, []byte) {
 
 	sendMsgData, err := json.Marshal(sendMsg)
 	if err != nil {
-		logger.Error("UploadNewCraftRet json marshal err =", err)
+		logger.Error("UploadNewCraftRet json marshal err = %+v", err)
 		return sendData, notiData
 	}
 	msgLen := len(sendMsgData)
@@ -103,7 +103,7 @@ func GetCraftMsg(recv_data []byte) []byte {
 
 	sendMsgData, err := json.Marshal(sendMsg)
 	if err != nil {
-		logger.Error("GetCraftRet json marshal err =", err)
+		logger.Error("GetCraftRet json marshal err = %+v", err)
 		return sendData
 	}
 	msgLen := len(sendMsgData)
@@ -122,7 +122,7 @@ func PraiseCraftMsg(recv_data []byte) []byte {
 
 	sendMsgData, err := json.Marshal(sendMsg)
 	if err != nil {
-		logger.Error("PraiseCraftRet json marshal err =", err)
+		logger.Error("PraiseCraftRet json marshal err = %+v", err)
 		return sendData
 	}
 	msgLen := len(sendMsgData)
@@ -141,7 +141,7 @@ func GetPraiseMsg(recv_data []byte) []byte {
 
 	sendMsgData, err := json.Marshal(sendMsg)
 	if err != nil {
-		logger.Error("GetPraiseMsgRet json marshal err =", err)
+		logger.Error("GetPraiseMsgRet json marshal err = %+v", err)
 		return sendData
 	}
 	msgLen := len(sendMsgData)
@@ -160,7 +160,7 @@ func GetPopularMsg(recv_data []byte) []byte {
 
 	sendMsgData, err := json.Marshal(sendMsg)
 	if err != nil {
-		logger.Error("GetPopularRet json marshal err =", err)
+		logger.Error("GetPopularRet json marshal err = %+v", err)
 		return sendData
 	}
 	msgLen := len(sendMsgData)

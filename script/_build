@@ -5,10 +5,10 @@ target=$2
 echo $target
 echo $srcdir
 
-build_main()
+build_game()
 {
-    cd $srcdir/main_server
-    echo "build main_server ...."
+    cd $srcdir/game_server
+    echo "build game_server ...."
     go build
     go install
     cd ..
@@ -40,7 +40,7 @@ build_mysql()
 
 build_all()
 {
-    build_main
+    build_game
     #build_log
     #build_db
     build_mysql
@@ -49,8 +49,8 @@ build_all()
 build()
 {
     case $target in
-        main)
-            build_main
+        game)
+            build_game
             ;;
         log)
             build_log

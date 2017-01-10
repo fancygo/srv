@@ -1,29 +1,43 @@
 package logger
 
-//这边是抄的我们游戏的 = =0
+// 前景 背景 颜色
+// ---------------------------------------
+// 30  40  黑色
+// 31  41  红色
+// 32  42  绿色
+// 33  43  黄色
+// 34  44  蓝色
+// 35  45  紫红色
+// 36  46  青蓝色
+// 37  47  白色
+//
+// 代码 意义
+// -------------------------
+//  0  终端默认设置
+//  1  高亮显示
+//  4  使用下划线
+//  5  闪烁
+//  7  反白显示
+//  8  不可见
 
 import (
 	"fmt"
-	"runtime"
 )
 
 const (
-	LOG_ALL  = 0
-	LOG_NONE = 1
+	COLOR_NONE = 0
+	COLOR_1    = 1
+	COLOR_2    = 2
+	COLOR_3    = 3
+	COLOR_4    = 4
+	COLOR_5    = 5
+	COLOR_6    = 6
+	COLOR_7    = 7
 
-	LOG_TRACE  = 9
-	LOG_DEBUG  = 10
-	LOG_NOTICE = 11
-	LOG_INFO   = 12
-	LOG_WARN   = 13
-	LOG_ERROR  = 14
-	LOG_FATAL  = 16
-
-	LOG_MAX = LOG_FATAL + 1
+	COLOR_MAX = 8
 )
 
-var stdTags [LOG_MAX][2]string
-var mSystem = runtime.GOOS
+var stdTags [COLOR_MAX][3]int
 
 const (
 	colorBlack = (iota + 30)
@@ -36,53 +50,57 @@ const (
 	colorWhite
 )
 
-func colorSeq(color int) string {
-	return fmt.Sprintf("\033[%dm", color)
-}
+//显示方式
+const (
+	opDefault   = 0
+	opHighlight = 1
+	opUnderline = 4
+	opShine     = 5
+	opInverse   = 7
+	opUnvis     = 8
+)
 
-func colorSeqBold(color int) string {
-	return fmt.Sprintf("\033[%d;1m", color)
-}
+//前景
+const (
+	fBlack   = 30
+	fRed     = 31
+	fGreen   = 32
+	fYellow  = 33
+	fBlue    = 34
+	fMagenta = 35
+	fCyan    = 36
+	fWhite   = 37
+)
 
-/*
+//背景
+const (
+	bBlack   = 40
+	bRed     = 41
+	bGreen   = 42
+	bYellow  = 43
+	bBlue    = 44
+	bMagenta = 45
+	bCyan    = 46
+	bWhite   = 47
+)
+
 func colorInit() {
-
-	stdTags = [LOG_MAX][4]string{}
-	stdTags[LOG_DEBUG] = [4]string{"[DEBUG]", "", "", ""}
-	stdTags[LOG_NOTICE] = [4]string{"[NOTICE]", colorSeq(colorBlue), colorSeqBold(colorBlue), "\033[0m"}
-	stdTags[LOG_INFO] = [4]string{"[INFO]", colorSeq(colorGreen), colorSeqBold(colorGreen), "\033[0m"}
-	stdTags[LOG_WARN] = [4]string{"[WARN]", colorSeq(colorYellow), colorSeqBold(colorYellow), "\033[0m"}
-	stdTags[LOG_ERROR] = [4]string{"[ERROR]", colorSeq(colorRed), colorSeqBold(colorRed), "\033[0m"}
-	stdTags[LOG_TRACE] = [4]string{"[TRACE]", colorSeq(colorCyan), colorSeqBold(colorCyan), "\033[0m"}
-	stdTags[LOG_FATAL] = [4]string{"[FATAL]", colorSeq(colorMagenta), colorSeqBold(colorMagenta), "\033[0m"}
-
-}
-*/
-
-func colorInit() {
-
-	stdTags = [LOG_MAX][2]string{}
-	stdTags[LOG_DEBUG] = [2]string{"[DEBUG]", "\033[0m"}
-	stdTags[LOG_NOTICE] = [2]string{"[NOTICE]", "\033[0m"}
-	stdTags[LOG_INFO] = [2]string{"[INFO]", "\033[0m"}
-	stdTags[LOG_WARN] = [2]string{"[WARN]", "\033[0m"}
-	stdTags[LOG_ERROR] = [2]string{"[ERROR]", "\033[0m"}
-	stdTags[LOG_TRACE] = [2]string{"[TRACE]", "\033[0m"}
-	stdTags[LOG_FATAL] = [2]string{"[FATAL]", "\033[0m"}
+	stdTags = [COLOR_MAX][3]int{}
+	stdTags[COLOR_1] = [3]int{opHighlight, fWhite, bBlack}
+	stdTags[COLOR_2] = [3]int{opHighlight, fBlue, bBlack}
+	stdTags[COLOR_3] = [3]int{opHighlight, fGreen, bBlack}
+	stdTags[COLOR_4] = [3]int{opHighlight, fYellow, bBlack}
+	stdTags[COLOR_5] = [3]int{opHighlight, fMagenta, bBlack}
+	stdTags[COLOR_6] = [3]int{opHighlight, fCyan, bBlack}
+	stdTags[COLOR_7] = [3]int{opHighlight, fRed, bBlack}
 
 }
 
-func colorString(level int) (tag string, cPre string, cSuf string) {
-	if level < LOG_TRACE || level >= LOG_MAX {
-		return
+func colorString(level int, str string) string {
+	if level < COLOR_1 || level >= COLOR_MAX {
+		return str
 	}
 
-	v := stdTags[level]
-	tag = v[0]
-	//cPre = v[1]
-	//cSuf = v[3]
-	cPre = ""
-	cSuf = ""
-
-	return
+	colorStr := fmt.Sprintf(" %c[%d;%d;%dm%s%s%c[0m ", 0x1b, stdTags[level][0], stdTags[level][2], stdTags[level][1], "", str, 0x1b)
+	return colorStr
 }

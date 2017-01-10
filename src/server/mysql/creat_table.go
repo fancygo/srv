@@ -30,10 +30,11 @@ func init() {
 }
 
 func connectMysql() (db *gorm.DB, err error) {
-	user := frame.GetDbUser()
-	pswd := frame.GetDbPswd()
-	host := frame.GetDbHost()
-	port := frame.GetDbPort()
+	sqlId := frame.GetMysqlId()
+	user := frame.GetSqlUser(sqlId)
+	pswd := frame.GetSqlPswd(sqlId)
+	host := frame.GetSqlHost(sqlId)
+	port := frame.GetSqlPort(sqlId)
 	database := "game"
 	login := user + ":" + pswd + "@(" + host + ":" + port + ")/" + database + "?charset=utf8&parseTime=True&loc=Local"
 	fmt.Println(login)
