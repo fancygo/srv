@@ -35,11 +35,17 @@ func connectMysql() (db *gorm.DB, err error) {
 	pswd := frame.GetSqlPswd(sqlId)
 	host := frame.GetSqlHost(sqlId)
 	port := frame.GetSqlPort(sqlId)
-	database := "game"
+	database := "test"
 	login := user + ":" + pswd + "@(" + host + ":" + port + ")/" + database + "?charset=utf8&parseTime=True&loc=Local"
 	fmt.Println(login)
 	db, err = gorm.Open("mysql", login)
 	return
+}
+
+type Value struct {
+	Tm    uint64 `gorm:"not null" codec:"tm"`
+	Key   uint64 `gorm:"not null; primary_key; unique_index" codec:"key"`
+	Value string `gorm:"type:mediumblob" codec:"value"`
 }
 
 func initTable() {
@@ -55,6 +61,10 @@ func initTable() {
 		//gDB.DropTable(&def.GoodCraft{})
 		gDB.CreateTable(&def.GoodCraft{})
 	}
+	if ok := gDB.HasTable(&Value{}); !ok {
+		//gDB.DropTable(&def.GoodCraft{})
+		gDB.CreateTable(&def.GoodCraft{})
+	}
 }
 
 func initData() {
@@ -65,6 +75,16 @@ func initData() {
 		}
 		gDB.Create(&user)
 	}
+
+	value := &Value{
+		Tm:    1,
+		Key:   1,
+		Value: "Fancy",
+	}
+	if ok := gDB.Save(&value); ok != nil {
+		fmt.Println(ok)
+	}
+
 }
 
 func main() {
